@@ -100,8 +100,8 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   // const isLoggedIn = localStorage.getItem("token"); //此处使用 localStorage 存储 token
   const isLoggedIn = store.state.user.operatorId;
-  console.log(isLoggedIn);
-  if (requiresAuth && isLoggedIn === undefined) {
+  console.log(Object.keys(store.state.user).length);
+  if (requiresAuth && Object.keys(store.state.user).length === 0) {
     // 如果未登录且页面需要授权，则跳转到登录页面
     next("/login");
   } else {
