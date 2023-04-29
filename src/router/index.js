@@ -13,12 +13,16 @@ const routes = [
   },
   {
     path: "/home",
-    redirect: "/home/rigistered",
+    redirect: "/home/main",
     component: () => import("../components/HomePage.vue"),
     meta: {
       requiresAuth: true, //设置需要授权的页面
     },
     children: [
+      {
+        path: "main",
+        component: () => import("../components/MainPage.vue"),
+      },
       {
         path: "rigistered",
         component: () => import("../views/VisitorRegister.vue"),

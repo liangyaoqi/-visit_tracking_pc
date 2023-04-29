@@ -18,8 +18,14 @@
                     </a-button>
                 </div>
                 <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
+                    <a-menu-item key="0" @click="to('/home/main')">
+                        <home-outlined />
+                        <span class="nav-text">
+                            首页
+                        </span>
+                    </a-menu-item>
                     <a-menu-item key="1" @click="to('/home/rigistered')">
-                        <user-outlined />
+                        <rise-outlined />
                         <span class="nav-text">
                             访客登记
                         </span>
@@ -31,13 +37,13 @@
                         </span>
                     </a-menu-item>
                     <a-menu-item key="3" @click="to('/home/search')">
-                        <video-camera-outlined />
+                        <monitor-outlined />
                         <span class="nav-text">
                             来访检索
                         </span>
                     </a-menu-item>
                     <a-menu-item key="4" @click="to('/home/blacklist')">
-                        <upload-outlined />
+                        <warning-outlined />
                         <span class="nav-text">
                             黑名单
                         </span>
@@ -85,7 +91,7 @@
     </div>
 </template>
 <script setup>
-import { UserOutlined, VideoCameraOutlined, UploadOutlined, TeamOutlined, LoginOutlined, LogoutOutlined } from '@ant-design/icons-vue';
+import { UserOutlined, MonitorOutlined, RiseOutlined, WarningOutlined, TeamOutlined, LoginOutlined, LogoutOutlined, HomeOutlined } from '@ant-design/icons-vue';
 import { onMounted, ref, } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -114,7 +120,7 @@ const onCollapse = (collapsed, type) => {
 const onBreakpoint = broken => {
     // console.log(broken);
 };
-const selectedKeys = ref(['1']);
+const selectedKeys = ref(['0']);
 
 const logout = () => {
     localStorage.removeItem('token')
