@@ -1,21 +1,24 @@
 <template>
     <div class="personal">
-        <div class="avatar">
-            <a-avatar :size="120">
-                <template #icon>
-                    <UserOutlined />
-                </template>
-            </a-avatar>
+        <div v-if="!edit">
+
+            <div class="avatar">
+                <a-avatar :size="120">
+                    <template #icon>
+                        <UserOutlined />
+                    </template>
+                </a-avatar>
+            </div>
+            <div class="user-info">
+                <a-descriptions title="User Info" bordered>
+                    <a-descriptions-item label="姓名">{{ user.name }}</a-descriptions-item>
+                    <a-descriptions-item label="邮箱">{{ user.email }}</a-descriptions-item>
+                    <a-descriptions-item label="部门">{{ user.deptid }}</a-descriptions-item>
+                    <a-descriptions-item label="手机">{{ user.phonenumber }}</a-descriptions-item>
+                </a-descriptions>
+            </div>
         </div>
-        <div class="user-info">
-            <a-descriptions title="User Info" bordered>
-                <a-descriptions-item label="姓名">{{ user.name }}</a-descriptions-item>
-                <a-descriptions-item label="邮箱">{{ user.email }}</a-descriptions-item>
-                <a-descriptions-item label="部门">{{ user.deptid }}</a-descriptions-item>
-                <a-descriptions-item label="手机">{{ user.phonenumber }}</a-descriptions-item>
-            </a-descriptions>
-        </div>
-        <a-form-item :wrapper-col="{ offset: 10, span: 16 }" style="margin-top: 20px;">
+        <a-form-item :wrapper-col="{ offset: 11, span: 16 }" style="margin-top: 20px;">
             <a-button type="primary" @click="onEdit">修改个人信息</a-button>
         </a-form-item>
         <div class="edit" v-if="edit">

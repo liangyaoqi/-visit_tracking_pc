@@ -64,6 +64,11 @@ const columns = [
         key: 'idcar',
     },
     {
+        title: '原因',
+        dataIndex: 'reason',
+        key: 'reason',
+    },
+    {
         title: '操作',
         dataIndex: 'operation',
     },
@@ -82,6 +87,10 @@ onMounted(async () => {
 });
 
 const onSubmit = async () => {
+    if (user.isadmin === "1") {
+        message.error('您没有权限删除');
+        return;
+    }
     console.log(form.value);
     const result = await addBlacklist(form.value);
     list.value.push(form.value);
@@ -101,7 +110,7 @@ const onSubmit = async () => {
 
 const onDelete = async key => {
     if (user.isadmin !== "1") {
-        message.err('您没有权限删除');
+        message.error('您没有权限删除');
         return;
     }
     console.log(key);
