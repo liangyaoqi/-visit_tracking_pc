@@ -1,30 +1,30 @@
 <template>
     <ul class="home-ul">
-        <li class="li-item">
+        <li class="li-item" @click="to('/home/rigistered')">
             <user-outlined />
             <span class="nav-text">
                 访客登记
             </span>
         </li>
-        <li class="li-item">
+        <li class="li-item" @click="to('/home/statistical')">
             <rise-outlined />
             <span class="nav-text">
                 访客流量统计
             </span>
         </li>
-        <li class="li-item">
+        <li class="li-item" @click="to('/home/search')">
             <monitor-outlined />
             <span class="nav-text">
                 来访检索
             </span>
         </li>
-        <li class="li-item">
+        <li class="li-item" @click="to('/home/blacklist')">
             <warning-outlined />
             <span class="nav-text">
                 黑名单
             </span>
         </li>
-        <li class="li-item">
+        <li class="li-item" @click="to('/home/personal')">
             <user-outlined />
             <span class="nav-text">
                 我的信息
@@ -36,10 +36,13 @@
 <script setup>
 import { ref } from 'vue'
 import { UserOutlined, RiseOutlined, WarningOutlined, MonitorOutlined, LoginOutlined, LogoutOutlined, HomeOutlined } from '@ant-design/icons-vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const to = (path) => {
+    router.push(path);
+}
 
-
-const count = ref(0)
 </script>
 
 
