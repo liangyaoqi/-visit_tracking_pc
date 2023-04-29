@@ -8,6 +8,7 @@ const store = createStore({
   state() {
     return {
       user: {},
+      selectKey: ["0"],
     };
   },
   mutations: {
@@ -27,6 +28,9 @@ const store = createStore({
       const result = await getOperatorById(id);
       state.user = result.data;
       console.log(state.user);
+    },
+    setSelectKey(state, key) {
+      state.selectKey = key;
     },
   },
   actions: {

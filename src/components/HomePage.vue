@@ -25,13 +25,13 @@
                         </span>
                     </a-menu-item>
                     <a-menu-item key="1" @click="to('/home/rigistered')">
-                        <rise-outlined />
+                        <user-outlined />
                         <span class="nav-text">
                             访客登记
                         </span>
                     </a-menu-item>
                     <a-menu-item key="2" @click="to('/home/statistical')">
-                        <user-outlined />
+                        <rise-outlined />
                         <span class="nav-text">
                             访客流量统计
                         </span>
@@ -92,7 +92,7 @@
 </template>
 <script setup>
 import { UserOutlined, MonitorOutlined, RiseOutlined, WarningOutlined, TeamOutlined, LoginOutlined, LogoutOutlined, HomeOutlined } from '@ant-design/icons-vue';
-import { onMounted, ref, } from 'vue';
+import { computed, onMounted, ref, } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
@@ -102,16 +102,13 @@ const store = useStore();
 
 const user = ref(store.state.user);
 
+// const selectedKeys = ref(['0']);
+
 const to = (path) => {
     router.push(path);
 }
 
-onMounted(() => {
-    console.log(user.value);
-
-})
-
-
+const selectedKeys = computed(() => store.state.selectKey)
 
 
 const onCollapse = (collapsed, type) => {
@@ -120,13 +117,14 @@ const onCollapse = (collapsed, type) => {
 const onBreakpoint = broken => {
     // console.log(broken);
 };
-const selectedKeys = ref(['0']);
 
 const logout = () => {
     localStorage.removeItem('token')
     store.commit('clearUser')
     router.push('/login')
 }
+
+console.log(selectedKeys.value);
 </script>
 <style scoped lang="scss">
 .home {

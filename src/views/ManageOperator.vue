@@ -35,7 +35,7 @@
                 <a-input v-model:value="form.deptid" />
             </a-form-item>
 
-            <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+            <a-form-item :wrapper-col="{ offset: 10, span: 16 }">
                 <a-button type="primary" html-type="submit">添加</a-button>
             </a-form-item>
         </a-form>
@@ -90,7 +90,7 @@
                     <a-input v-model:value="popItem.deptid" />
                 </a-form-item>
 
-                <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
+                <a-form-item :wrapper-col="{ offset: 10, span: 16 }">
                     <a-button type="primary" html-type="submit" @click="onEditSubmit">提交</a-button>
                 </a-form-item>
             </a-form>

@@ -37,9 +37,30 @@
 import { ref } from 'vue'
 import { UserOutlined, RiseOutlined, WarningOutlined, MonitorOutlined, LoginOutlined, LogoutOutlined, HomeOutlined } from '@ant-design/icons-vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import store from '../vuex';
 
 const router = useRouter();
 const to = (path) => {
+    switch (path) {
+        case '/home/rigistered':
+            store.commit('setSelectKey', ['1'])
+            break;
+        case '/home/statistical':
+            store.commit('setSelectKey', ['2'])
+            break;
+        case '/home/search':
+            store.commit('setSelectKey', ['3'])
+            break;
+        case '/home/blacklist':
+            store.commit('setSelectKey', ['4'])
+            break;
+        case '/home/personal':
+            store.commit('setSelectKey', ['5'])
+            break;
+        default:
+            break;
+    }
     router.push(path);
 }
 
@@ -62,7 +83,7 @@ const to = (path) => {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 300px;
+        width: 500px;
         height: 200px;
         border: 1px solid #ccc;
         border-radius: 5px;

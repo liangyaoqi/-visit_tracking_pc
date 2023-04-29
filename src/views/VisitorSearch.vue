@@ -3,8 +3,7 @@
         <a-form :model="state" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
             @finish="onSearch" @finishFailed="onFinishFailed">
             <a-form-item label="名称" name="name">
-                <a-input-search v-model:value="state.name" placeholder="input search loading with enterButton"
-                    :loading="state.loading" enter-button />
+                <a-input-search v-model:value="state.name" :loading="state.loading" enter-button />
             </a-form-item>
 
             <a-form-item name="area" label="入口">
@@ -93,7 +92,7 @@ const onFinishFailed = (errorInfo) => {
 
 const list = ref([])
 
-const enters = ref([{ label: 'A', value: 'A' }, { label: 'B', value: 'B' }, { label: 'C', value: 'C' }, { label: 'D', value: 'D' }])
+const enters = ref([{ label: 'A', value: 'A' }, { label: 'B', value: 'B' }, { label: 'C', value: 'C' }])
 const onSearch = async () => {
     console.log(state.input)
     state.loading = true

@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import store from "../vuex";
-import { computed } from "vue";
-import { message } from "ant-design-vue";
+import HomePage from "../components/HomePage.vue";
 
 const routes = [
   {
@@ -14,7 +13,7 @@ const routes = [
   {
     path: "/home",
     redirect: "/home/main",
-    component: () => import("../components/HomePage.vue"),
+    component: HomePage,
     meta: {
       requiresAuth: true, //设置需要授权的页面
     },
@@ -104,7 +103,6 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   // const isLoggedIn = localStorage.getItem("token"); //此处使用 localStorage 存储 token
   const isLoggedIn = store.state.user.operatorId;
-  console.log(Object.keys(store.state.user).length);
   if (requiresAuth && Object.keys(store.state.user).length === 0) {
     // 如果未登录且页面需要授权，则跳转到登录页面
     next("/login");

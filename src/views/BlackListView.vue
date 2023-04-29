@@ -88,7 +88,7 @@ onMounted(async () => {
 
 const onSubmit = async () => {
     if (user.isadmin === "1") {
-        message.error('您没有权限删除');
+        message.error('您没有权限添加');
         return;
     }
     console.log(form.value);
