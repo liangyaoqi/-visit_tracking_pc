@@ -15,6 +15,9 @@ const routes = [
     path: "/home",
     redirect: "/home/rigistered",
     component: () => import("../components/HomePage.vue"),
+    meta: {
+      requiresAuth: true, //设置需要授权的页面
+    },
     children: [
       {
         path: "rigistered",
@@ -26,34 +29,58 @@ const routes = [
       {
         path: "blacklist",
         component: () => import("../views/BlackListView.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
       {
         path: "search",
         component: () => import("../views/VisitorSearch.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
       {
         path: "personal",
         component: () => import("../views/PersonalView.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
       {
         path: "statistical",
         component: () => import("../views/VisitorStatistical.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
       {
         path: "manage",
         component: () => import("../views/ManageOperator.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
       {
         path: "announced",
         component: () => import("../views/AnnouncedView.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
       {
         path: "balcklist",
         component: () => import("../views/BlackListView.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
       {
         path: "dept",
         component: () => import("../views/DeptManage.vue"),
+        meta: {
+          requiresAuth: true, //设置需要授权的页面
+        },
       },
     ],
   },
@@ -72,9 +99,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   // const isLoggedIn = localStorage.getItem("token"); //此处使用 localStorage 存储 token
-  const isLoggedIn = computed(() => store.state.user.operatorId).value;
-  console.log(requiresAuth && !isLoggedIn);
-  if (requiresAuth && isLoggedIn) {
+  const isLoggedIn = store.state.user.operatorId;
+  console.log(isLoggedIn);
+  if (requiresAuth && isLoggedIn === undefined) {
     // 如果未登录且页面需要授权，则跳转到登录页面
     next("/login");
   } else {

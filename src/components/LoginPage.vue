@@ -49,7 +49,9 @@ const handleSubmit = async () => {
             store.commit('saveUser')
             localStorage.setItem("token", result.data);
             // 登陆成功，跳转到首页
-            router.push('/home')
+            setTimeout(() => {
+                router.push('/home')
+            }, 500)
         } else {
             message.error('登录失败:', result.message)
         }

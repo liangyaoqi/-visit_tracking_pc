@@ -15,9 +15,10 @@ const store = createStore({
       state.count++;
     },
     async saveUser(state) {
+      console.log("saveUser");
       const result = await getOperator();
-      localStorage.setItem("user", JSON.stringify(result.data));
       state.user = result.data;
+      console.log(state.user);
     },
     clearUser(state) {
       state.user = {};

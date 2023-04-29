@@ -94,14 +94,14 @@ const router = useRouter();
 
 const store = useStore();
 
-const user = ref(JSON.parse(localStorage.getItem('user')));
-console.log(user.name);
+const user = ref(store.state.user);
 
 const to = (path) => {
     router.push(path);
 }
 
 onMounted(() => {
+    console.log(user.value);
 
 })
 
@@ -118,7 +118,6 @@ const selectedKeys = ref(['1']);
 
 const logout = () => {
     localStorage.removeItem('token')
-    localStorage.removeItem('user')
     store.commit('clearUser')
     router.push('/login')
 }
