@@ -42,7 +42,7 @@
                             来访检索
                         </span>
                     </a-menu-item>
-                    <a-menu-item key="4" @click="to('/home/blacklist')">
+                    <a-menu-item key="4" @click="to('/home/blacklistCheck')">
                         <warning-outlined />
                         <span class="nav-text">
                             黑名单
@@ -105,7 +105,43 @@ const user = ref(store.state.user);
 // const selectedKeys = ref(['0']);
 
 const to = (path) => {
+    switch (path) {
+        case '/home/main':
+            store.commit('setSelectKey', ['0'])
+            break;
+        case '/home/rigistered':
+            store.commit('setSelectKey', ['1'])
+            break;
+        case '/home/statistical':
+            store.commit('setSelectKey', ['2'])
+            break;
+        case '/home/search':
+            store.commit('setSelectKey', ['3'])
+            break;
+        case '/home/blacklist':
+            store.commit('setSelectKey', ['9'])
+            break;
+        case '/home/personal':
+            store.commit('setSelectKey', ['5'])
+            break;
+        case '/home/manage':
+            store.commit('setSelectKey', ['7'])
+            break;
+        case '/home/announced':
+            store.commit('setSelectKey', ['8'])
+            break;
+        case '/home/blacklistCheck':
+            store.commit('setSelectKey', ['4'])
+            break;
+        case '/home/dept':
+            store.commit('setSelectKey', ['10'])
+            break;
+
+        default:
+            break;
+    }
     router.push(path);
+
 }
 
 const selectedKeys = computed(() => store.state.selectKey)

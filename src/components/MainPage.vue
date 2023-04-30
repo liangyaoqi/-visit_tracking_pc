@@ -18,7 +18,7 @@
                 来访检索
             </span>
         </li>
-        <li class="li-item" @click="to('/home/blacklist')">
+        <li class="li-item" @click="to('/home/blacklistCheck')">
             <warning-outlined />
             <span class="nav-text">
                 黑名单
@@ -52,7 +52,7 @@ const to = (path) => {
         case '/home/search':
             store.commit('setSelectKey', ['3'])
             break;
-        case '/home/blacklist':
+        case '/home/blacklistCheck':
             store.commit('setSelectKey', ['4'])
             break;
         case '/home/personal':

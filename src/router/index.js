@@ -30,7 +30,7 @@ const routes = [
         },
       },
       {
-        path: "blacklist",
+        path: "blacklistCheck",
         component: () => import("../views/BlackListView.vue"),
         meta: {
           requiresAuth: true, //设置需要授权的页面
@@ -72,7 +72,7 @@ const routes = [
         },
       },
       {
-        path: "balcklist",
+        path: "blacklist",
         component: () => import("../views/BlackListView.vue"),
         meta: {
           requiresAuth: true, //设置需要授权的页面
