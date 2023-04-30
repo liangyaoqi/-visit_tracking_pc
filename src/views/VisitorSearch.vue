@@ -20,7 +20,7 @@
         </a-form>
     </div>
     <div class="result" v-if="list.length !== 0" style="overflow: hidden">
-        <a-table :columns="columns" :data-source="list" :pagination="{ pageSize: 10 }" :scroll="{ y: 340 }" />
+        <a-table :columns="columns" :data-source="list" :pagination="{ pageSize: 5 }" :scroll="{ y: 340 }" />
     </div>
 </template>
 
