@@ -6,4 +6,7 @@ const addBlacklist = (data) => request.post("/api/blacklist/add", data);
 
 const deleteBlacklist = (id) => request.delete(`/api/blacklist/delete/${id}`);
 
-export { getBlacklist, addBlacklist, deleteBlacklist };
+const searchBlacklist = (data) =>
+  request.post("/api/blacklist/getBlacklist", data);
+
+export { getBlacklist, addBlacklist, deleteBlacklist, searchBlacklist };

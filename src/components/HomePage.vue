@@ -68,7 +68,7 @@
                             发布公告
                         </a-menu-item>
                         <a-menu-item key="9" @click="to('/home/blacklist')">
-                            查看黑名单
+                            检索黑名单
                         </a-menu-item>
                         <a-menu-item key="10" @click="to('/home/dept')">
                             单位管理
@@ -78,12 +78,12 @@
             </a-layout-sider>
             <a-layout>
                 <a-layout-header class="header" :style="{ background: '#fff', padding: 0 }">来访人员登记追溯系统</a-layout-header>
-                <a-layout-content :style="{ margin: '24px 16px 0' }">
+                <a-layout-content :style="{ margin: '24px 16px 0' }" class="content">
                     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
                         <RouterView />
                     </div>
                 </a-layout-content>
-                <a-layout-footer style="text-align: center">
+                <a-layout-footer style="text-align: center" class="footer">
                     Visit Tracking ©2023 Created by ZKT
                 </a-layout-footer>
             </a-layout>
@@ -172,6 +172,14 @@ console.log(selectedKeys.value);
         text-align: center;
         font-size: large;
         font-weight: 600;
+    }
+
+    .content {
+        overflow: auto;
+    }
+
+    .footer {
+        color: #b6b5b5;
     }
 
     .logo {

@@ -2,20 +2,25 @@
     <div class="blacklist">
         <a-form :model="form" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
             @finish="onSubmit" @finishFailed="onFinishFailed">
-            <a-form-item label="昵称" name="name">
+            <a-form-item label="昵称" name="name" :rules="[{ required: true, message: '请输入昵称!' }]">
                 <a-input v-model:value="form.name" />
             </a-form-item>
 
-            <a-form-item label="身份证号码" name="idcar">
+            <a-form-item label="身份证号码" name="idcar" :rules="[{ required: true, message: '请输入身份证号码!' }]">
                 <a-input v-model:value="form.idcar" />
             </a-form-item>
+
+            <a-form-item label="原因" name="reason">
+                <a-input v-model:value="form.reason" :rules="[{ required: true, message: '请输入原因' }]" />
+            </a-form-item>
+
             <a-form-item :wrapper-col="{ offset: 10, span: 16 }">
-                <a-button type="primary" html-type="submit">检索</a-button>
+                <a-button type="primary" html-type="submit">添加</a-button>
             </a-form-item>
         </a-form>
     </div>
     <div class="result" v-if="list.length !== 0" style="overflow: hidden">
-        <a-table :columns="columns" :data-source="list" :pagination="{ pageSize: 5 }" :scroll="{ y: 340 }">
+        <a-table :columns="columns" :data-source="list" :pagination="{ pageSize: 10 }" :scroll="{ y: 340 }">
             <template #bodyCell="{ column, text, record }">
                 <template v-if="column.dataIndex === 'name'">
 
@@ -35,7 +40,7 @@
 import { CheckOutlined, EditOutlined } from '@ant-design/icons-vue';
 import { onMounted, ref, computed, reactive } from 'vue';
 import { message } from 'ant-design-vue'
-import { getBlacklist, addBlacklist, deleteBlacklist, searchBlacklist } from '../request/blacklist';
+import { getBlacklist, addBlacklist, deleteBlacklist } from '../request/blacklist';
 import { useStore } from 'vuex';
 
 const user = useStore().state.user;
@@ -82,11 +87,23 @@ onMounted(async () => {
 });
 
 const onSubmit = async () => {
-    const result = await searchBlacklist(form.value);
+    if (user.isadmin === "1") {
+        message.error('您没有权限添加');
+        return;
+    }
+    console.log(form.value);
+    const result = await addBlacklist(form.value);
+    list.value.push(form.value);
+    console.log(result);
     if (result.success) {
-        message.success('检索成功');
-        console.log(result.data);
-        list.value = result.data;
+        message.success('添加成功');
+        form.value = {
+            name: '',
+            reason: '',
+            idcar: '',
+        }
+    } else {
+        message.error('添加失败');
     }
 }
 

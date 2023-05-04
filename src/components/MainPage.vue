@@ -1,31 +1,31 @@
 <template>
     <ul class="home-ul">
         <li class="li-item" @click="to('/home/rigistered')">
-            <user-outlined />
+            <user-outlined :style="{ fontSize: '100px' }" />
             <span class="nav-text">
                 访客登记
             </span>
         </li>
         <li class="li-item" @click="to('/home/statistical')">
-            <rise-outlined />
+            <rise-outlined :style="{ fontSize: '100px' }" />
             <span class="nav-text">
                 访客流量统计
             </span>
         </li>
         <li class="li-item" @click="to('/home/search')">
-            <monitor-outlined />
+            <monitor-outlined :style="{ fontSize: '100px' }" />
             <span class="nav-text">
                 来访检索
             </span>
         </li>
         <li class="li-item" @click="to('/home/blacklistCheck')">
-            <warning-outlined />
+            <warning-outlined :style="{ fontSize: '100px' }" />
             <span class="nav-text">
                 黑名单
             </span>
         </li>
         <li class="li-item" @click="to('/home/personal')">
-            <user-outlined />
+            <user-outlined :style="{ fontSize: '100px' }" />
             <span class="nav-text">
                 我的信息
             </span>
@@ -80,18 +80,23 @@ const to = (path) => {
 
     .li-item {
         display: flex;
+        /* 每行最多展示 4 个元素 */
+        flex: 1 0 calc(45% - 10px);
+        margin: 5px;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 500px;
+        width: 450px;
         height: 200px;
         border: 1px solid #ccc;
         border-radius: 5px;
         margin: 10px;
         cursor: pointer;
+        background-color: #ebebeb;
 
         .nav-text {
             margin-top: 10px;
+            font-size: large;
         }
     }
 }
