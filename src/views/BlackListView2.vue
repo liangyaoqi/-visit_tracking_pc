@@ -1,5 +1,5 @@
 <template>
-    <div class="blacklist">
+    <div class="blacklist" v-if="!(user.isadmin === '1')">
         <a-form :model="form" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
             @finish="onSubmit" @finishFailed="onFinishFailed">
             <a-form-item label="昵称" name="name" :rules="[{ required: true, message: '请输入昵称!' }]">
@@ -16,6 +16,21 @@
 
             <a-form-item :wrapper-col="{ offset: 10, span: 16 }">
                 <a-button type="primary" html-type="submit">添加</a-button>
+            </a-form-item>
+        </a-form>
+    </div>
+    <div class="add" v-else>
+        <a-form :model="form" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
+            @finish="onSubmit" @finishFailed="onFinishFailed">
+            <a-form-item label="昵称" name="name">
+                <a-input v-model:value="form.name" />
+            </a-form-item>
+
+            <a-form-item label="身份证号码" name="idcar">
+                <a-input v-model:value="form.idcar" />
+            </a-form-item>
+            <a-form-item :wrapper-col="{ offset: 10, span: 16 }">
+                <a-button type="primary" html-type="submit">检索</a-button>
             </a-form-item>
         </a-form>
     </div>
@@ -122,6 +137,8 @@ const onDelete = async key => {
         message.error('删除失败');
     }
 };
+
+console.log(!user.isadmin === '1');
 </script>
 
 <style lang="scss" scoped>

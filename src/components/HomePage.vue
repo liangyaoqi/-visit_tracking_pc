@@ -68,7 +68,7 @@
                             发布公告
                         </a-menu-item>
                         <a-menu-item key="9" @click="to('/home/blacklist')">
-                            检索黑名单
+                            查看黑名单
                         </a-menu-item>
                         <a-menu-item key="10" @click="to('/home/dept')">
                             单位管理

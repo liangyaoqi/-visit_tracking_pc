@@ -32,6 +32,7 @@ const routes = [
       {
         path: "blacklistCheck",
         component: () => import("../views/BlackListView2.vue"),
+
         meta: {
           requiresAuth: true, //设置需要授权的页面
         },

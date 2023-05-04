@@ -86,8 +86,8 @@ const to = (path) => {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 450px;
-        height: 200px;
+        width: 250px;
+        height: 150px;
         border: 1px solid #ccc;
         border-radius: 5px;
         margin: 10px;
