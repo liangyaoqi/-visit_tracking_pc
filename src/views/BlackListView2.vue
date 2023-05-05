@@ -21,7 +21,7 @@
     </div>
     <div class="add" v-else>
         <a-form :model="form" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
-            @finish="onSubmit" @finishFailed="onFinishFailed">
+            @finish="onSubmit2" @finishFailed="onFinishFailed">
             <a-form-item label="昵称" name="name">
                 <a-input v-model:value="form.name" />
             </a-form-item>
@@ -65,6 +65,15 @@ const form = ref({
     reason: '',
     idcar: '',
 })
+
+const onSubmit2 = async () => {
+    const result = await searchBlacklist(form.value);
+    if (result.success) {
+        message.success('检索成功');
+        console.log(result.data);
+        list.value = result.data;
+    }
+}
 
 const columns = [
 
