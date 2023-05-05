@@ -92,7 +92,7 @@ const onFinishFailed = (errorInfo) => {
 
 const list = ref([])
 
-const enters = ref([{ label: 'A', value: 'A' }, { label: 'B', value: 'B' }, { label: 'C', value: 'C' }])
+const enters = ref([{ label: 'A', value: 'A' }, { label: 'B', value: 'B' }, { label: 'C', value: 'C' }, { label: '', value: null }])
 const onSearch = async () => {
     console.log(state.input)
     state.loading = true

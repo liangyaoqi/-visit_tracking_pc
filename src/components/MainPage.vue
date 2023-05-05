@@ -88,11 +88,11 @@ const to = (path) => {
         justify-content: center;
         width: 250px;
         height: 150px;
-        border: 1px solid #ccc;
+        border: 1px solid #f4f4f4;
         border-radius: 5px;
         margin: 10px;
         cursor: pointer;
-        background-color: #ebebeb;
+        background-color: #f0f2f5;
 
         .nav-text {
             margin-top: 10px;

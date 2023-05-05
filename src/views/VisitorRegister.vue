@@ -119,35 +119,70 @@ const onAutoInput = () => {
     form.name = getUserName();
     form.idcard = generateIdCard();
     form.temperature = "36.5";
-    form.vehicleid = "粤A12345";
+    form.vehicleid = generateLicensePlate();
     form.companyname = "深圳市腾讯计算机系统有限公司";
     form.reason = "上班";
     form.isepidemicarea = false;
     form.enter = "A";
 }
 
+function generateLicensePlate() {
+    // 车牌号码格式定义
+    const licensePlateFormats = [
+        '京A#####', '津A#####', '沪A#####', '渝A#####', '冀A#####',
+        '豫A#####', '云A#####', '辽A#####', '黑A#####', '湘A#####',
+        '皖A#####', '鲁A#####', '新A#####', '苏A#####', '浙A#####',
+        '赣A#####', '鄂A#####', '桂A#####', '甘A#####', '晋A#####',
+        '蒙A#####', '陕A#####', '吉A#####', '闽A#####', '贵A#####',
+        '粤A#####', '青A#####', '藏A#####', '川A#####', '宁A#####',
+        '琼A#####', '使######' // 使馆车牌号码格式
+    ]
+
+    // 随机选择车牌号码格式并生成对应的车牌号码
+    const licensePlateFormat = licensePlateFormats[Math.floor(Math.random() * licensePlateFormats.length)]
+    let licensePlate = ''
+    for (let i = 0; i < licensePlateFormat.length; i++) {
+        if (licensePlateFormat.charAt(i) === '#') {
+            licensePlate += String(Math.floor(Math.random() * 10))
+        } else if (licensePlateFormat.charAt(i) === '使') {
+            licensePlate += '使'
+            break
+        } else {
+            licensePlate += licensePlateFormat.charAt(i)
+        }
+    }
+
+    return licensePlate
+}
+
 function generateIdCard() {
-    const addressCode = ["11", "12", "13", "14", "15", "21", "22", "23", "31", "32", "33", "34", "35", "36", "37", "41", "42", "43", "44", "45", "46", "50", "51", "52", "53", "54", "61", "62", "63", "64", "65", "71", "81", "82", "91"];
-    const weightFactors = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-    const checkCode = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"];
-    const addressCodeIndex = Math.floor(Math.random() * addressCode.length);
-    const address = addressCode[addressCodeIndex];
-    const birthday = new Date(Math.floor(Math.random() * (new Date().getTime() - new Date("1900-01-01").getTime())) + new Date("1900-01-01").getTime());
-    const year = birthday.getFullYear().toString().substring(2);
-    const month = (birthday.getMonth() + 1).toString().padStart(2, "0");
-    const day = birthday.getDate().toString().padStart(2, "0");
-    let randomCode = "";
-    for (let i = 0; i < 3; i++) {
-        randomCode += Math.floor(Math.random() * 10);
+    // 随机生成前 6 位地区码（根据中华人民共和国民政部公布的行政区划代码）
+    const areas = ["110000", "120000", "130000", "140000", "150000", "210000", "220000", "230000", "310000", "320000", "330000", "340000", "350000", "360000", "370000", "410000", "420000", "430000", "440000", "450000", "460000", "500000", "510000", "520000", "530000", "540000", "610000", "620000", "630000", "640000", "650000"]
+    const areaCode = areas[Math.floor(Math.random() * areas.length)]
+
+    // 随机生成出生年月日
+    const birthYear = Math.floor(Math.random() * (2002 - 1950 + 1)) + 1950
+    const birthMonth = Math.floor(Math.random() * 12) + 1
+    const maxDaysInMonth = new Date(birthYear, birthMonth, 0).getDate()
+    const birthDay = Math.floor(Math.random() * maxDaysInMonth) + 1
+
+    // 随机生成顺序码和校验码
+    const orderCode = String(Math.floor(Math.random() * 1000)).padStart(3, '0')
+    const checkCode = getCheckCode(`${areaCode}${birthYear}${String(birthMonth).padStart(2, '0')}${String(birthDay).padStart(2, '0')}${orderCode}`)
+
+    // 拼接身份证号码并返回
+    return `${areaCode}${birthYear}${String(birthMonth).padStart(2, '0')}${String(birthDay).padStart(2, '0')}${orderCode}${checkCode}`
+}
+
+// 计算身份证校验码
+function getCheckCode(idCard) {
+    const coefficient = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2] // 加权因子
+    const checksum = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'] // 校验码对应值
+    let sum = 0
+    for (let i = 0; i < coefficient.length; i++) {
+        sum += Number(idCard.charAt(i)) * coefficient[i]
     }
-    let idCard = `${address}${year}${month}${day}${randomCode}`;
-    let sum = 0;
-    for (let i = 0; i < idCard.length; i++) {
-        sum += parseInt(idCard[i]) * weightFactors[i];
-    }
-    let checkCodeIndex = sum % 11;
-    idCard += checkCode[checkCodeIndex];
-    return idCard;
+    return checksum[sum % 11]
 }
 
 function getUserName() {

@@ -176,6 +176,8 @@ console.log(selectedKeys.value);
 
     .content {
         overflow: auto;
+        width: 80vw;
+        overflow-x: hidden;
     }
 
     .footer {

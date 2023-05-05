@@ -167,9 +167,9 @@ const columns = [
         key: 'position',
     },
     {
-        title: '密码',
-        dataIndex: 'password',
-        key: 'password',
+        title: '用户名',
+        dataIndex: 'username',
+        key: 'username',
     },
     {
         title: '操作',
