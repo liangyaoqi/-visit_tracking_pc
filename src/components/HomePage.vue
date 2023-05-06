@@ -157,6 +157,7 @@ const onBreakpoint = broken => {
 const logout = () => {
     localStorage.removeItem('token')
     store.commit('clearUser')
+    store.commit('setSelectKey', ['0'])
     router.push('/login')
 }
 
