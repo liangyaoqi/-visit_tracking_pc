@@ -2,7 +2,7 @@
     <div class="blacklist" v-if="!(user.isadmin === '1')">
         <a-form :model="form" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
             @finish="onSubmit" @finishFailed="onFinishFailed">
-            <a-form-item label="昵称" name="name" :rules="[{ required: true, message: '请输入昵称!' }]">
+            <a-form-item label="姓名" name="name" :rules="[{ required: true, message: '请输入昵称!' }]">
                 <a-input v-model:value="form.name" />
             </a-form-item>
 
@@ -22,7 +22,7 @@
     <div class="add" v-else>
         <a-form :model="form" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
             @finish="onSubmit2" @finishFailed="onFinishFailed">
-            <a-form-item label="昵称" name="name">
+            <a-form-item label="姓名" name="name">
                 <a-input v-model:value="form.name" />
             </a-form-item>
 
@@ -55,7 +55,7 @@
 import { CheckOutlined, EditOutlined } from '@ant-design/icons-vue';
 import { onMounted, ref, computed, reactive } from 'vue';
 import { message } from 'ant-design-vue'
-import { getBlacklist, addBlacklist, deleteBlacklist } from '../request/blacklist';
+import { getBlacklist, addBlacklist, deleteBlacklist, searchBlacklist } from '../request/blacklist';
 import { useStore } from 'vuex';
 
 const user = useStore().state.user;
@@ -69,9 +69,14 @@ const form = ref({
 const onSubmit2 = async () => {
     const result = await searchBlacklist(form.value);
     if (result.success) {
-        message.success('检索成功');
+
         console.log(result.data);
         list.value = result.data;
+        if (list.value.length === 0) {
+            message.error('未检索到该用户');
+        } else {
+            message.success('检索成功');
+        }
     }
 }
 

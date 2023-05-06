@@ -2,7 +2,7 @@
     <div class="blacklist">
         <a-form :model="form" name="basic" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }" autocomplete="off"
             @finish="onSubmit" @finishFailed="onFinishFailed">
-            <a-form-item label="昵称" name="name">
+            <a-form-item label="姓名" name="name">
                 <a-input v-model:value="form.name" />
             </a-form-item>
 
@@ -87,6 +87,9 @@ const onSubmit = async () => {
         message.success('检索成功');
         console.log(result.data);
         list.value = result.data;
+        if (list.value.length === 0) {
+            message.error('未检索到相关信息');
+        }
     }
 }
 
