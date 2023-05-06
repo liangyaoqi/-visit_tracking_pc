@@ -84,11 +84,12 @@ onMounted(async () => {
 const onSubmit = async () => {
     const result = await searchBlacklist(form.value);
     if (result.success) {
-        message.success('检索成功');
         console.log(result.data);
         list.value = result.data;
         if (list.value.length === 0) {
-            message.error('未检索到相关信息');
+            message.error('未检索到该用户');
+        } else {
+            message.success('检索成功');
         }
     }
 }
